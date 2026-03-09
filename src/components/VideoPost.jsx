@@ -100,22 +100,42 @@ export default function VideoPost({ video, isActive }) {
                             <p className="empty-sub">Be the first to comment.</p>
                         </div>
                     ) : (
-                        <div className="comment-thread">
-                            {/* Dummy mock comment */}
-                            <div className="comment-avatar" style={{ background: '#f48fb1' }}>A</div>
-                            <div className="comment-content">
-                                <span className="comment-user">Ash ♥</span>
-                                <p className="comment-text">"Are you scrolling instead of sleeping again?"</p>
-                                <div className="comment-meta">
-                                    <span>2025-10-25</span>
-                                    <span>Reply</span>
+                        <>
+                            {video.essayComments && video.essayComments.map((comment, i) => (
+                                <div className="comment-thread" key={i}>
+                                    <div className="comment-avatar" style={{ background: '#20D5EC', color: 'black', fontWeight: 'bold' }}>{comment.initial}</div>
+                                    <div className="comment-content">
+                                        <span className="comment-user">{comment.author}</span>
+                                        <p className="comment-text">"{comment.text}"</p>
+                                        <div className="comment-meta">
+                                            <span>Just now</span>
+                                            <span>Reply</span>
+                                        </div>
+                                    </div>
+                                    <div className="comment-like">
+                                        <Heart size={16} color="#8a8b91" />
+                                        <span>{(5.4 + i * 1.2).toFixed(1)}k</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="comment-like">
-                                <Heart size={16} color="#8a8b91" />
-                                <span>164.1K</span>
-                            </div>
-                        </div>
+                            ))}
+                            {(!video.essayComments || video.essayComments.length === 0) && (
+                                <div className="comment-thread">
+                                    <div className="comment-avatar" style={{ background: '#f48fb1' }}>A</div>
+                                    <div className="comment-content">
+                                        <span className="comment-user">Ash ♥</span>
+                                        <p className="comment-text">"Are you scrolling instead of sleeping again?"</p>
+                                        <div className="comment-meta">
+                                            <span>2025-10-25</span>
+                                            <span>Reply</span>
+                                        </div>
+                                    </div>
+                                    <div className="comment-like">
+                                        <Heart size={16} color="#8a8b91" />
+                                        <span>164.1K</span>
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     )}
                 </div>
 

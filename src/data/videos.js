@@ -11,6 +11,10 @@ export const videos = [
     gradient: "linear-gradient(160deg, #f9a825 0%, #e64a19 40%, #880e4f 100%)",
     avatarColor: "linear-gradient(135deg, #f9a825, #e64a19)",
     category: "all",
+    essayComments: [
+      { author: "Dr. Susan Tapert", text: "The amygdala sends stress signals that keep us alert and scanning for danger, and that doomscrolling satisfies that need.", initial: "DT" },
+      { author: "Lore Explorer", text: "Following our instincts releases dopamine (hormone of happiness) making us want to look more into these news.", initial: "LE" }
+    ]
   },
   {
     id: 2,
@@ -24,6 +28,9 @@ export const videos = [
     gradient: "linear-gradient(160deg, #1b5e20 0%, #388e3c 40%, #a5d6a7 100%)",
     avatarColor: "linear-gradient(135deg, #00bcd4, #1a237e)",
     category: "sports",
+    essayComments: [
+      { author: "Modern Millie", text: "Did you know there is an implicit body language that the algorithm learns from. It is like having your own 'magic mirror' that 'reads' your attention.", initial: "MM" }
+    ]
   },
   {
     id: 3,
@@ -50,6 +57,9 @@ export const videos = [
     gradient: "linear-gradient(160deg, #37474f 0%, #546e7a 35%, #78909c 100%)",
     avatarColor: "linear-gradient(135deg, #ff8f00, #0d47a1)",
     category: "sports",
+    essayComments: [
+      { author: "GenZ Analyst", text: "We are not in an era of peace. Around 50% of Gen Z-ers experience some sort of anxiety which is driven by economic instability, social media, and future uncertainty.", initial: "GA" }
+    ]
   },
   {
     id: 5,
@@ -76,6 +86,10 @@ export const videos = [
     gradient: "linear-gradient(160deg, #4a148c 0%, #7b1fa2 50%, #ce93d8 100%)",
     avatarColor: "linear-gradient(135deg, #f48fb1, #7b1fa2)",
     category: "funny",
+    essayComments: [
+      { author: "Dr. Natasha Wade", text: "Adolescents develop their emotion centers before other regions like the ones responsible for self-regulation and impulse control.", initial: "NW" },
+      { author: "Skeptic101", text: "These companies are 'trying to make a dime off of kids' (Wade).", initial: "S1" }
+    ]
   },
   {
     id: 7,
@@ -102,6 +116,9 @@ export const videos = [
     gradient: "linear-gradient(160deg, #1a237e 0%, #283593 35%, #5c6bc0 100%)",
     avatarColor: "linear-gradient(135deg, #7986cb, #1a237e)",
     category: "comedy",
+    essayComments: [
+      { author: "Generation Analyst", text: "We are, in a sense, a sorrowful generation. A generation which spent their adolescence locked down in a contained space; a generation whose coming of age came with the rise of AI.", initial: "GA" }
+    ]
   },
   {
     id: 9,
@@ -128,6 +145,9 @@ export const videos = [
     gradient: "linear-gradient(160deg, #880e4f 0%, #c2185b 45%, #f48fb1 100%)",
     avatarColor: "linear-gradient(135deg, #f48fb1, #880e4f)",
     category: "comedy",
+    essayComments: [
+      { author: "Final Truth", text: "Thus, the conversation is not whether TikTok is good or bad, but why a system was engineered to be this difficult to leave, and what it means that it found us at exactly the moment we most needed somewhere to escape to.", initial: "FT" }
+    ]
   },
   {
     id: 11,

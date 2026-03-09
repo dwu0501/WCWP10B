@@ -1,22 +1,73 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { videos } from '../data/videos';
 import VideoPost from './VideoPost';
 import { ArrowLeft, ChevronUp, ChevronDown } from 'lucide-react';
 import './VideoFeed.css';
 
-export default function VideoFeed({ startIndex = 0, onClose }) {
+export default function VideoFeed({ startIndex = 0, onClose, onVideoChange, onShowActivity }) {
     const [activeIndex, setActiveIndex] = useState(startIndex);
+    const startViewTime = useRef(Date.now());
+    const wheelTimeout = useRef(null);
+
+    // Effect to handle time tracking per video category
+    useEffect(() => {
+        // Reset start timer when active index changes
+        startViewTime.current = Date.now();
+
+        return () => {
+            // When we advance to the NEXT index (or unmount), calculate how long we spent on the current one
+            const timeSpentMs = Date.now() - startViewTime.current;
+            const currentVideo = videos[activeIndex];
+
+            if (currentVideo && currentVideo.category && onVideoChange) {
+                // Pass the topic and timeSpent back up to App.jsx global state
+                onVideoChange(currentVideo.category, timeSpentMs);
+            }
+        };
+    }, [activeIndex, onVideoChange]);
 
     // We want individual posts to fill the screen right-to-left. 
     // VideoFeed manages traversing the array.
 
-    const handleNext = () => {
-        if (activeIndex < videos.length - 1) setActiveIndex(activeIndex + 1);
-    };
+    const handleNext = useCallback(() => {
+        if (activeIndex === 10 && onShowActivity) {
+            onShowActivity();
+        } else if (activeIndex < videos.length - 1) {
+            setActiveIndex(prev => prev + 1);
+        }
+    }, [activeIndex, onShowActivity]);
 
-    const handlePrev = () => {
-        if (activeIndex > 0) setActiveIndex(activeIndex - 1);
-    };
+    const handlePrev = useCallback(() => {
+        if (activeIndex > 0) setActiveIndex(prev => prev - 1);
+    }, [activeIndex]);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === 'ArrowDown') handleNext();
+            if (e.key === 'ArrowUp') handlePrev();
+        };
+
+        const handleWheel = (e) => {
+            // Debounce wheel scroll
+            if (wheelTimeout.current) return;
+            if (e.deltaY > 50) {
+                handleNext();
+                wheelTimeout.current = setTimeout(() => wheelTimeout.current = null, 800);
+            } else if (e.deltaY < -50) {
+                handlePrev();
+                wheelTimeout.current = setTimeout(() => wheelTimeout.current = null, 800);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('wheel', handleWheel);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('wheel', handleWheel);
+            if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
+        };
+    }, [handleNext, handlePrev]);
 
     return (
         <div className="video-feed-container">

@@ -4,14 +4,14 @@ import './Sidebar.css';
 
 const navItems = [
     { id: 'home', icon: Home, label: 'For You' },
-    { id: 'explore', icon: Compass, label: 'Explore', active: true },
+    { id: 'explore', icon: Compass, label: 'Explore' },
     { id: 'following', icon: Users, label: 'Following' },
-    { id: 'live', icon: Radio, label: 'LIVE' },
-    { id: 'upload', icon: Upload, label: 'Upload' },
+    { id: 'worksCited', icon: Radio, label: 'Works Cited' },
+    { id: 'activityCenter', icon: Upload, label: 'Activity Center' },
     { id: 'profile', icon: User, label: 'Profile' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ activeView, setActiveView }) {
     const [active, setActive] = useState('explore');
 
     return (
@@ -37,11 +37,11 @@ export default function Sidebar() {
                 {navItems.map(({ id, icon: Icon, label }) => (
                     <button
                         key={id}
-                        className={`sidebar-item ${active === id ? 'active' : ''}`}
-                        onClick={() => setActive(id)}
+                        className={`sidebar-item ${activeView === id ? 'active' : ''}`}
+                        onClick={() => setActiveView(id)}
                     >
                         <span className="sidebar-item-icon">
-                            <Icon size={22} strokeWidth={active === id ? 2.5 : 1.8} />
+                            <Icon size={22} strokeWidth={activeView === id ? 2.5 : 1.8} />
                         </span>
                         {label}
                     </button>
