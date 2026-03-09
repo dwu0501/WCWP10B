@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, Search, Compass, Users, Upload, User, MoreHorizontal } from 'lucide-react';
+import { Home, Search, Compass, Users, Upload, User } from 'lucide-react';
 import './Sidebar.css';
 
 function CustomLiveIcon({ size, strokeWidth }) {
@@ -18,21 +18,12 @@ const navItems = [
     { id: 'home', icon: Home, label: 'For You' },
     { id: 'explore', icon: Compass, label: 'Explore' },
     { id: 'following', icon: Users, label: 'Following' },
-<<<<<<< HEAD
     { id: 'live', icon: CustomLiveIcon, label: 'LIVE' },
     { id: 'upload', icon: Upload, label: 'Upload' },
     { id: 'profile', icon: User, label: 'Profile' },
 ];
 
 export default function Sidebar({ onOpenActivityCenter, onOpenLiveCenter, onOpenWorksCited }) {
-=======
-    { id: 'worksCited', icon: Radio, label: 'Works Cited' },
-    { id: 'activityCenter', icon: Upload, label: 'Activity Center' },
-    { id: 'profile', icon: User, label: 'Profile' },
-];
-
-export default function Sidebar({ activeView, setActiveView }) {
->>>>>>> 50055af094136b67f9795f5a710ca3e2083749c2
     const [active, setActive] = useState('explore');
 
     return (
@@ -58,19 +49,14 @@ export default function Sidebar({ activeView, setActiveView }) {
                 {navItems.map(({ id, icon: Icon, label }) => (
                     <button
                         key={id}
-<<<<<<< HEAD
                         className={`sidebar-item ${active === id ? 'active' : ''}`}
                         onClick={() => {
                             setActive(id);
                             if (id === 'live') onOpenLiveCenter();
                         }}
-=======
-                        className={`sidebar-item ${activeView === id ? 'active' : ''}`}
-                        onClick={() => setActiveView(id)}
->>>>>>> 50055af094136b67f9795f5a710ca3e2083749c2
                     >
                         <span className="sidebar-item-icon">
-                            <Icon size={22} strokeWidth={activeView === id ? 2.5 : 1.8} />
+                            <Icon size={22} strokeWidth={active === id ? 2.5 : 1.8} />
                         </span>
                         {label}
                     </button>
