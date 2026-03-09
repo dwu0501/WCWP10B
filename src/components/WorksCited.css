@@ -1,0 +1,104 @@
+.wc-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.wc-content {
+    background: #111;
+    width: 90%;
+    max-width: 680px;
+    max-height: 85vh;
+    border-radius: 12px;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid #333;
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.wc-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.wc-close:hover {
+    color: #fe2c55;
+}
+
+.wc-header {
+    padding: 36px 40px 20px;
+    border-bottom: 1px solid #222;
+}
+
+.wc-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 6px;
+}
+
+.wc-subtitle {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+}
+
+.wc-body {
+    padding: 30px 40px 40px;
+}
+
+.wc-list {
+    list-style: decimal;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wc-item {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #ccc;
+}
+
+.wc-author {
+    color: #fff;
+    font-weight: 600;
+}
+
+.wc-year {
+    color: #aaa;
+}
+
+.wc-title {
+    font-style: italic;
+    color: #e0e0e0;
+}
+
+.wc-source {
+    color: #888;
+}
+
+.wc-link {
+    color: #00f2fe;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.wc-link:hover {
+    text-decoration: underline;
+}

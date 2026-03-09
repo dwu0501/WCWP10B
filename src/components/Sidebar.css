@@ -132,6 +132,85 @@
     margin: 10px 12px;
 }
 
+/* Activity Center Block */
+.sidebar-activity-center {
+    padding: 12px;
+    margin: 0 12px;
+    background: rgba(254, 44, 85, 0.05); /* Slight tint using TikTok accent */
+    border: 1px solid rgba(254, 44, 85, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.activity-live-badge {
+    background: var(--accent);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.activity-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.activity-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.activity-question-box {
+    background: var(--bg-hover);
+    padding: 8px;
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+}
+
+.activity-q-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.activity-question {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 600;
+}
+
+.activity-btn {
+    width: 100%;
+    margin-top: 4px;
+    padding: 8px 12px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.activity-btn:hover {
+    background: #e6284d;
+}
+
 /* Login button */
 .sidebar-login-section {
     padding: 12px 12px;

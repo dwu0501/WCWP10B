@@ -92,29 +92,32 @@ export default function VideoPost({ video, isActive }) {
                     <button>Creator videos</button>
                 </div>
 
-                {/* Comments List (Empty if indicated) */}
+                {/* Comments List */}
                 <div className="comments-list">
-                    {video.emptyComments ? (
+                    {video.commentsList && video.commentsList.length > 0 ? (
+                        video.commentsList.map((comment, idx) => (
+                            <div className="comment-thread" key={idx}>
+                                <div className="comment-avatar" style={{ background: '#f48fb1' }}>
+                                    {comment.user[0].toUpperCase()}
+                                </div>
+                                <div className="comment-content">
+                                    <span className="comment-user">{comment.user}</span>
+                                    <p className="comment-text">{comment.text}</p>
+                                    <div className="comment-meta">
+                                        <span>{comment.date}</span>
+                                        <span>Reply</span>
+                                    </div>
+                                </div>
+                                <div className="comment-like">
+                                    <Heart size={16} color="#8a8b91" />
+                                    <span>{comment.likes}</span>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
                         <div className="empty-comments">
                             <p>No comments yet.</p>
                             <p className="empty-sub">Be the first to comment.</p>
-                        </div>
-                    ) : (
-                        <div className="comment-thread">
-                            {/* Dummy mock comment */}
-                            <div className="comment-avatar" style={{ background: '#f48fb1' }}>A</div>
-                            <div className="comment-content">
-                                <span className="comment-user">Ash ♥</span>
-                                <p className="comment-text">"Are you scrolling instead of sleeping again?"</p>
-                                <div className="comment-meta">
-                                    <span>2025-10-25</span>
-                                    <span>Reply</span>
-                                </div>
-                            </div>
-                            <div className="comment-like">
-                                <Heart size={16} color="#8a8b91" />
-                                <span>164.1K</span>
-                            </div>
                         </div>
                     )}
                 </div>

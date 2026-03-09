@@ -5,18 +5,18 @@ import './ExplorePage.css';
 
 const CATEGORIES = [
     { id: 'all', label: 'All' },
-    { id: 'singing', label: 'Singing & Dancing' },
-    { id: 'comedy', label: 'Comedy' },
-    { id: 'sports', label: 'Sports' },
-    { id: 'anime', label: 'Anime & Comics' },
-    { id: 'relationship', label: 'Relationship' },
-    { id: 'shows', label: 'Shows & Series' },
-    { id: 'lipsync', label: 'Lip Sync' },
-    { id: 'daily', label: 'Daily Life' },
+    { id: 'funny', label: 'Funny' },
+    { id: 'news', label: 'News' },
+    { id: 'sports', label: 'Sports' }
 ];
 
 export default function ExplorePage({ onVideoClick }) {
     const [activeTab, setActiveTab] = useState('all');
+
+    const exploreVideos = videos.filter(v => v.id !== 10);
+    const filteredVideos = activeTab === 'all'
+        ? exploreVideos
+        : exploreVideos.filter(v => v.category === activeTab);
 
     return (
         <div className="explore-page">
@@ -49,11 +49,11 @@ export default function ExplorePage({ onVideoClick }) {
             {/* ── Grid ─────────────────────────────── */}
             <div className="explore-content">
                 <div className="explore-grid">
-                    {videos.map((video, index) => (
+                    {filteredVideos.map((video, index) => (
                         <VideoCard
                             key={video.id}
                             video={video}
-                            onClick={() => onVideoClick?.(index)}
+                            onClick={() => onVideoClick?.(videos.indexOf(video))}
                         />
                     ))}
                 </div>
@@ -66,10 +66,13 @@ function VideoCard({ video, onClick }) {
     return (
         <div className="video-card" onClick={onClick}>
             {/* Thumbnail */}
-            <div className="video-card-thumb">
-                <div
+            <div className="video-card-thumb" style={{ overflow: 'hidden' }}>
+                <video
                     className="video-card-bg"
-                    style={{ background: video.gradient, height: '100%' }}
+                    src={`${video.videoSrc}#t=0.5`}
+                    muted
+                    playsInline
+                    style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: 'inherit' }}
                 />
                 {/* Hover overlay with play button */}
                 <div className="video-card-overlay">

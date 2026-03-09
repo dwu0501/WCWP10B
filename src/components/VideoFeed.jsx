@@ -1,17 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { videos } from '../data/videos';
 import VideoPost from './VideoPost';
 import { ArrowLeft, ChevronUp, ChevronDown } from 'lucide-react';
 import './VideoFeed.css';
 
-export default function VideoFeed({ startIndex = 0, onClose }) {
+export default function VideoFeed({ startIndex = 0, onClose, onFinish, onWatchUpdate }) {
     const [activeIndex, setActiveIndex] = useState(startIndex);
+    const [watchTimes, setWatchTimes] = useState({});
 
-    // We want individual posts to fill the screen right-to-left. 
-    // VideoFeed manages traversing the array.
+    // Track time spent on the current video, push updates to parent
+    useEffect(() => {
+        const videoId = videos[activeIndex].id;
+        const interval = setInterval(() => {
+            setWatchTimes(prev => {
+                const updated = { ...prev, [videoId]: (prev[videoId] || 0) + 1 };
+                if (onWatchUpdate) onWatchUpdate(updated);
+                return updated;
+            });
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [activeIndex]);
 
     const handleNext = () => {
-        if (activeIndex < videos.length - 1) setActiveIndex(activeIndex + 1);
+        if (activeIndex < videos.length - 1) {
+            setActiveIndex(activeIndex + 1);
+        } else {
+            // Reached the end, trigger activity center transition
+            if (onFinish) onFinish(watchTimes);
+        }
     };
 
     const handlePrev = () => {
@@ -40,7 +56,6 @@ export default function VideoFeed({ startIndex = 0, onClose }) {
                 <button
                     className="feed-nav-btn"
                     onClick={handleNext}
-                    disabled={activeIndex === videos.length - 1}
                 >
                     <ChevronDown size={24} color="white" />
                 </button>

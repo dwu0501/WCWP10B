@@ -1,0 +1,63 @@
+.live-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.live-modal-content {
+    background: #121212;
+    width: 90%;
+    max-width: 650px;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid #333;
+    animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.live-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.live-modal-close:hover {
+    color: #fe2c55;
+}
+
+.live-modal-body {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.live-section h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fe2c55;
+    /* TikTok Red */
+    margin: 0 0 10px 0;
+}
+
+.live-section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin: 0;
+}

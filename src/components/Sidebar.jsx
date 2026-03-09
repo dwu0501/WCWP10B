@@ -1,17 +1,29 @@
 import { useState } from 'react';
-import { Home, Search, Compass, Users, Radio, Upload, User, MoreHorizontal } from 'lucide-react';
+import { Home, Search, Compass, Users, Upload, User, MoreHorizontal } from 'lucide-react';
 import './Sidebar.css';
+
+function CustomLiveIcon({ size, strokeWidth }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+            <polyline points="17 2 12 7 7 2"></polyline>
+            <line x1="8" y1="16" x2="8" y2="12"></line>
+            <line x1="12" y1="16" x2="12" y2="10"></line>
+            <line x1="16" y1="16" x2="16" y2="14"></line>
+        </svg>
+    );
+}
 
 const navItems = [
     { id: 'home', icon: Home, label: 'For You' },
     { id: 'explore', icon: Compass, label: 'Explore', active: true },
     { id: 'following', icon: Users, label: 'Following' },
-    { id: 'live', icon: Radio, label: 'LIVE' },
+    { id: 'live', icon: CustomLiveIcon, label: 'LIVE' },
     { id: 'upload', icon: Upload, label: 'Upload' },
     { id: 'profile', icon: User, label: 'Profile' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onOpenActivityCenter, onOpenLiveCenter, onOpenWorksCited }) {
     const [active, setActive] = useState('explore');
 
     return (
@@ -38,7 +50,10 @@ export default function Sidebar() {
                     <button
                         key={id}
                         className={`sidebar-item ${active === id ? 'active' : ''}`}
-                        onClick={() => setActive(id)}
+                        onClick={() => {
+                            setActive(id);
+                            if (id === 'live') onOpenLiveCenter();
+                        }}
                     >
                         <span className="sidebar-item-icon">
                             <Icon size={22} strokeWidth={active === id ? 2.5 : 1.8} />
@@ -46,7 +61,37 @@ export default function Sidebar() {
                         {label}
                     </button>
                 ))}
+
+                <button
+                    className="sidebar-item"
+                    onClick={() => {
+                        setActive('activity');
+                        onOpenActivityCenter();
+                    }}
+                    style={{ marginTop: 8 }}
+                >
+                    <span className="sidebar-item-icon">
+                        <Upload size={22} color="#fe2c55" strokeWidth={2.5} />
+                    </span>
+                    <span style={{ fontWeight: 700, color: '#fe2c55' }}>Activity Center</span>
+                </button>
             </nav>
+
+            <div className="sidebar-divider" />
+
+            {/* Gen Z Mental Health / LIVE Section */}
+            <div className="sidebar-live-section" id="sidebar-live-section">
+                <div className="activity-live-badge">LIVE Now</div>
+                <h4 className="activity-title">Gen Z Mental Health & Anxiety</h4>
+                <p className="activity-desc">
+                    Around 50% of Gen Z-ers experience some sort of anxiety driven by economic instability and future uncertainty. Find out more.
+                </p>
+                <div className="activity-question-box">
+                    <p className="activity-q-label">LIVE Discussion Topic:</p>
+                    <p className="activity-question">"What conditions cause a person to be trapped on the internet?"</p>
+                </div>
+                <button className="activity-btn" onClick={onOpenLiveCenter}>Join LIVE Discussion</button>
+            </div>
 
             <div className="sidebar-divider" />
 
@@ -56,6 +101,24 @@ export default function Sidebar() {
                     Log in to follow creators, like videos, and view comments.
                 </p>
                 <button className="sidebar-login-btn">Log in</button>
+            </div>
+
+            <div className="sidebar-divider" />
+
+            {/* Works Cited Section */}
+            <div className="sidebar-works-cited">
+                <div className="sidebar-item works-cited-btn" onClick={onOpenWorksCited} style={{ cursor: 'pointer' }}>
+                    <span className="sidebar-item-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="2" />
+                            <path d="M16.24 7.76a6 6 0 0 1 0 8.49" />
+                            <path d="M7.76 16.24a6 6 0 0 1 0-8.49" />
+                            <path d="M20.07 4.93a10 10 0 0 1 0 14.14" />
+                            <path d="M3.93 19.07a10 10 0 0 1 0-14.14" />
+                        </svg>
+                    </span>
+                    Works Cited
+                </div>
             </div>
 
             <div className="sidebar-divider" />
